@@ -1,5 +1,5 @@
-MAINTAINER Mark Determan <mdeterman@identifid.com>
 FROM anapsix/alpine-java:8_server-jre_unlimited
+MAINTAINER Mark Determan <mdeterman@identifid.com>
 
 # Install curl to provide healthcheck
 RUN apk add --update curl && \
