@@ -9,10 +9,10 @@ ARG ARTIFACT_NAME
 ARG SERVER_PORT=8080
 ARG MANAGMENT_PORT=8000
 
-ONBUILD ADD /${ARTIFACT_NAME} /${ARTIFACT_NAME}
+ONBUILD ADD /${ARTIFACT_NAME} /app.jar
 
 # so that it has a file modification time (Docker creates all container files in an "unmodified" state by default)
-RUN sh -c 'touch /${ARTIFACT_NAME}'
+RUN sh -c 'touch /app.jar'
 
 EXPOSE ${SERVER_PORT}
 EXPOSE ${MANAGMENT_PORT}
@@ -20,4 +20,4 @@ EXPOSE ${MANAGMENT_PORT}
 HEALTHCHECK --timeout=10s CMD curl --fail http://localhost:${MANAGMENT_PORT}/health || exit 1
 
 ENTRYPOINT ["java"]
-CMD ["-Djava.security.egd=file:/dev/./urandom", "-jar", "/${ARTIFACT_NAME}"]
+CMD ["-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
